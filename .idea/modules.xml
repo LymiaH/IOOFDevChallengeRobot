@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot.iml" filepath="$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot_main.iml" filepath="$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot_main.iml" group="IOOFDevChallengeRobot" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot_test.iml" filepath="$PROJECT_DIR$/.idea/modules/IOOFDevChallengeRobot_test.iml" group="IOOFDevChallengeRobot" />
+    </modules>
+  </component>
+</project>
