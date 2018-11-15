@@ -1,5 +1,6 @@
 package lymiah.ioofrobot.commands
 
+import lymiah.ioofrobot.robot.RobotState
 import java.util.*
 
 /**
@@ -35,5 +36,28 @@ class CommandRegistry(
      */
     fun register(name: String, cmd: ICommand) {
         commands[name] = cmd
+    }
+
+    /**
+     * Obtains a state transformation function given the command string.
+     * @return
+     * @see ICommand.apply
+     */
+    fun getTransformFromCommandString(command: String) : ((RobotState?) -> RobotState?)? {
+        val spaceIndex = command.indexOf(' ')
+        val name: String
+        val args: String
+
+        if(spaceIndex != -1) {
+            name = command.substring(0, spaceIndex)
+            args = command.substring(spaceIndex + 1)
+        } else {
+            name = command
+            args = ""
+        }
+
+        val cmd = commands[name] ?: return null
+
+        return { state -> cmd.apply(args, state)}
     }
 }
