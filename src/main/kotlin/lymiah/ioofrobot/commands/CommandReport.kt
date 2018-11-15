@@ -1,7 +1,7 @@
 package lymiah.ioofrobot.commands
 
 import lymiah.ioofrobot.robot.RobotState
-import java.io.BufferedWriter
+import java.io.PrintStream
 
 /**
  * Reports the current state of the robot.
@@ -16,9 +16,9 @@ class CommandReport : ICommand {
      * @param output For writing any messages back to the command sender
      * @return unchanged state.
      */
-    override fun apply(args: String, state: RobotState?, output: BufferedWriter): RobotState? {
+    override fun apply(args: String, state: RobotState?, output: PrintStream): RobotState? {
         if(state == null) return null
-        output.appendln("${state.x},${state.y},${state.facing.name}")
+        output.println("${state.x},${state.y},${state.facing.name}")
         return state
     }
 

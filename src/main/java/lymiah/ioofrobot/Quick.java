@@ -1,5 +1,7 @@
 package lymiah.ioofrobot;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +32,8 @@ public class Quick {
         LOOKUP_FACING_NAME = Collections.unmodifiableMap(temp);
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+    public static void process(InputStream input, PrintStream out, PrintStream err) {
+        Scanner in = new Scanner(input);
         int W = 5;
         int H = 5;
         int x = 0;
@@ -50,7 +52,7 @@ public class Quick {
             }
             cmd =  cmd.toUpperCase();
             if (!placed && !cmd.equals("PLACE")){
-                System.err.println("Ignoring Command: " + line);
+                err.println("Ignoring Command: " + line);
                 continue;
             }
 
@@ -70,7 +72,7 @@ public class Quick {
                         success = false;
                     }
                     if (!success || split.length != 3) {
-                        System.err.println("PLACE expected X,Y,NORTH/SOUTH/EAST/WEST but got: " + params);
+                        err.println("PLACE expected X,Y,NORTH/SOUTH/EAST/WEST but got: " + params);
                         break;
                     }
                     nfacing = LOOKUP_FACING_ID.get(split[2].substring(0, 1).toUpperCase());
@@ -98,10 +100,10 @@ public class Quick {
                     nfacing = (facing + 1) % 4;
                 } break;
                 case "REPORT": {
-                    System.out.println(String.format("%d,%d,%s", x, y, LOOKUP_FACING_NAME.get(facing)));
+                    out.println(String.format("%d,%d,%s", x, y, LOOKUP_FACING_NAME.get(facing)));
                 } break;
                 default: {
-                    System.err.println("Unknown Command: " + line);
+                    err.println("Unknown Command: " + line);
                 }
             }
 
@@ -111,8 +113,12 @@ public class Quick {
                 y = ny;
                 facing = nfacing;
             } else {
-                System.err.println(String.format("Invalid Movement to %d,%d caused by: %s", nx, ny, line));
+                err.println(String.format("Invalid Movement to %d,%d caused by: %s", nx, ny, line));
             }
         }
+    }
+
+    public static void main(String[] args) {
+        process(System.in, System.out, System.err);
     }
 }

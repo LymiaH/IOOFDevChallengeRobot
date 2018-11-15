@@ -3,6 +3,7 @@ package lymiah.ioofrobot.commands
 import lymiah.ioofrobot.robot.Facing
 import lymiah.ioofrobot.robot.RobotState
 import java.io.BufferedWriter
+import java.io.PrintStream
 
 /**
  * Creates a new Robot State
@@ -30,7 +31,7 @@ class CommandPlace : ICommand {
      * @return a new robot state as described by the args.
      * @throws IllegalArgumentException if the args are incorrect.
      */
-    override fun apply(args: String, state: RobotState?, output: BufferedWriter): RobotState? {
+    override fun apply(args: String, state: RobotState?, output: PrintStream): RobotState? {
         val split = args.split(',')
         if (split.size != 3) {
             throw IllegalArgumentException("Expected X,Y,N(ORTH)/S(OUTH)/E(AST)/W(EST)")

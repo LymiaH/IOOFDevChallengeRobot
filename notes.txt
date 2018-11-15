@@ -1,0 +1,43 @@
+One Toy Robot
+
+Bounds: 5 by 5 units
+
+Robot can move anywhere within the area. (Is it integer coordinates? Assumption: Robot can only be on integer coordinates.)
+
+Robot should not follow commands if it would place it outside the area.
+    Assumption: Coordinates in the range [0, 5) are allowed, so that is 0, 1, 2, 3, 4 ONLY.
+
+Even if a command fails, it should still follow valid commands after.
+
+Origin (0, 0) is considered the South-West corner.
+
+Robot
+    Position (x, y)
+    Facing (North, South, East, West) (Assuming: Only these directions are allowed, not anything in between.)
+
+First command must be: PLACE
+All commands should be discarded till a PLACE command is reached.
+
+Commands
+    PLACE X,Y,F
+        Must be the first command
+        Can be issued again to move the robot directly
+        Robot will be moved to X,Y facing F (NORTH, SOUTH, EAST, WEST)
+
+    MOVE
+        Moves the robot one space forward
+
+    LEFT
+        Rotates robot Anti-Clockwise by 90 degrees.
+        N -> W -> S -> E -> N
+    
+    RIGHT
+        Rotates robot Clockwise by 90 degrees.
+        N -> E -> S -> W -> N
+    
+    REPORT
+        Outputs Location (X, Y) and Facing (F) of the robot.
+
+Input can be from a file or stdin.
+
+Test data is required.

@@ -6,8 +6,8 @@ import lymiah.ioofrobot.commands.CommandRegistry
 import lymiah.ioofrobot.robot.RobotSimulation
 import lymiah.ioofrobot.robot.RobotState
 import java.io.BufferedReader
-import java.io.BufferedWriter
 import java.io.FileReader
+import java.io.PrintStream
 
 /**
  * Print line to stderr.
@@ -67,7 +67,7 @@ fun parseCommandAndApplyToSimulation(parser: CommandRegistry, sim: RobotSimulati
     }
 }
 
-fun processInput(input: BufferedReader, output: BufferedWriter) {
+fun processInput(input: BufferedReader, output: PrintStream) {
 
     val parser = CommandRegistry(registerDefaults = true, output = output)
     val boundary = RectangleBoundary(width = 5, height = 5)
@@ -89,6 +89,7 @@ fun processInput(input: BufferedReader, output: BufferedWriter) {
 
     // We've confirmed that the first element is a valid Place Command at this point, so this should not NPE
     val initialState = parser.getTransformFromCommandString(initialStateLine)!!(null)!!
+    eprintln("Initial State: ${initialState}")
 
     // Creating a simulation using the initial state found
     val sim =  RobotSimulation(initialState = initialState) //TODO: Configurable boundary?
@@ -101,6 +102,7 @@ fun processInput(input: BufferedReader, output: BufferedWriter) {
         // Runs the remaining commands on the simulation
         lines.forEach { line ->
             parseCommandAndApplyToSimulation(parser, sim, line)
+            output.flush()
         }
     }
 }
@@ -114,6 +116,6 @@ fun main(args: Array<String>) {
     }
 
     input.use {
-        processInput(input, System.out.bufferedWriter())
+        processInput(input, System.out)
     }
 }

@@ -2,7 +2,7 @@ package lymiah.ioofrobot.commands
 
 import lymiah.ioofrobot.robot.RobotState
 import lymiah.ioofrobot.util.NulledOutputStream
-import java.io.BufferedWriter
+import java.io.PrintStream
 import java.util.*
 
 /**
@@ -13,7 +13,7 @@ import java.util.*
  */
 class CommandRegistry(
         val registerDefaults: Boolean = true,
-        val output: BufferedWriter = NulledOutputStream().bufferedWriter()
+        val output: PrintStream = PrintStream(NulledOutputStream())
 ) {
     /**
      * The registered commands.
