@@ -20,13 +20,13 @@ data class RobotState (
      * Returns the RobotState if turned left
      */
     fun left() : RobotState {
-        return RobotState(x, y, facing.left)
+        return RobotState(x, y, facing.getLeft())
     }
 
     /**
      * Returns the RobotState if turned right
      */
     fun right() : RobotState {
-        return RobotState(x, y, facing.right)
+        return RobotState(x, y, facing.getRight())
     }
 }
