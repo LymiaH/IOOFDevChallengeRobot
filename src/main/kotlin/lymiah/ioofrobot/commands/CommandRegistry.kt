@@ -20,10 +20,10 @@ class CommandRegistry(
     init {
         if (registerDefaults) {
             register("PLACE", CommandPlace())
-//            register("MOVE", CommandMove())
-//            register("LEFT", CommandLeft())
-//            register("RIGHT", CommandRight())
-//            register("REPORT", CommandReport())
+            register("MOVE", CommandMove())
+            register("LEFT", CommandLeft())
+            register("RIGHT", CommandRight())
+            register("REPORT", CommandReport())
         }
     }
 

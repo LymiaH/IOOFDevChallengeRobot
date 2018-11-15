@@ -3,6 +3,9 @@ package lymiah.ioofrobot.commands
 import lymiah.ioofrobot.robot.Facing
 import lymiah.ioofrobot.robot.RobotState
 
+/**
+ * Creates a new Robot State
+ */
 class CommandPlace : ICommand {
     companion object {
         fun facingFromString(text: String): Facing? {
@@ -21,9 +24,9 @@ class CommandPlace : ICommand {
      * Create a new Robot State with the given position and orientation.
      *
      * @param args X,Y,N(ORTH)/S(OUTH)/E(AST)/W(EST)
-     * @param state Ignored
-     * @return a new robot state as described by the args
-     * @throws IllegalArgumentException if the args are incorrect
+     * @param state Ignored.
+     * @return a new robot state as described by the args.
+     * @throws IllegalArgumentException if the args are incorrect.
      */
     override fun apply(args: String, state: RobotState?): RobotState? {
         val split = args.split(',')
