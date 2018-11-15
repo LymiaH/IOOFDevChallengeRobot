@@ -1,6 +1,7 @@
 package lymiah.ioofrobot.commands
 
 import lymiah.ioofrobot.robot.RobotState
+import java.io.BufferedWriter
 
 /**
  * Describes a command that takes a string parameter with the current state and returns a new state.
@@ -15,8 +16,9 @@ interface ICommand {
      *
      * @param args Text that comes after the command. Can be an empty string.
      * @param state Current robot state (this can be null if state not initialized yet)
-     * @return next robot state
+     * @param output For writing any messages back to the command sender
+     * @return Next robot state
      * @throws IllegalArgumentException Can be thrown if there is incorrect args.
      */
-    fun apply(args: String, state: RobotState?): RobotState?
+    fun apply(args: String, state: RobotState?, output: BufferedWriter): RobotState?
 }

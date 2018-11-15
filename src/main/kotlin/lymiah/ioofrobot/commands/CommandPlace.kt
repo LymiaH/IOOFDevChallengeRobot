@@ -2,6 +2,7 @@ package lymiah.ioofrobot.commands
 
 import lymiah.ioofrobot.robot.Facing
 import lymiah.ioofrobot.robot.RobotState
+import java.io.BufferedWriter
 
 /**
  * Creates a new Robot State
@@ -25,10 +26,11 @@ class CommandPlace : ICommand {
      *
      * @param args X,Y,N(ORTH)/S(OUTH)/E(AST)/W(EST)
      * @param state Ignored.
+     * @param output For writing any messages back to the command sender
      * @return a new robot state as described by the args.
      * @throws IllegalArgumentException if the args are incorrect.
      */
-    override fun apply(args: String, state: RobotState?): RobotState? {
+    override fun apply(args: String, state: RobotState?, output: BufferedWriter): RobotState? {
         val split = args.split(',')
         if (split.size != 3) {
             throw IllegalArgumentException("Expected X,Y,N(ORTH)/S(OUTH)/E(AST)/W(EST)")

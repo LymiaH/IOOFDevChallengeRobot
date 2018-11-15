@@ -6,6 +6,7 @@ import lymiah.ioofrobot.commands.CommandRegistry
 import lymiah.ioofrobot.robot.RobotSimulation
 import lymiah.ioofrobot.robot.RobotState
 import java.io.BufferedReader
+import java.io.BufferedWriter
 import java.io.FileReader
 
 /**
@@ -66,9 +67,9 @@ fun parseCommandAndApplyToSimulation(parser: CommandRegistry, sim: RobotSimulati
     }
 }
 
-fun processInput(input: BufferedReader) {
+fun processInput(input: BufferedReader, output: BufferedWriter) {
 
-    val parser = CommandRegistry(registerDefaults = true)
+    val parser = CommandRegistry(registerDefaults = true, output = output)
     val boundary = RectangleBoundary(width = 5, height = 5)
 
     // Runs commands till once specifies initial state (by default only the PlaceCommand)
@@ -113,6 +114,6 @@ fun main(args: Array<String>) {
     }
 
     input.use {
-        processInput(input)
+        processInput(input, System.out.bufferedWriter())
     }
 }

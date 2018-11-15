@@ -1,6 +1,8 @@
 package lymiah.ioofrobot.commands
 
 import lymiah.ioofrobot.robot.RobotState
+import lymiah.ioofrobot.util.NulledOutputStream
+import java.io.BufferedWriter
 import java.util.*
 
 /**
@@ -10,7 +12,8 @@ import java.util.*
  * @property registerDefaults Should register default commands.
  */
 class CommandRegistry(
-        val registerDefaults: Boolean = true
+        val registerDefaults: Boolean = true,
+        val output: BufferedWriter = NulledOutputStream().bufferedWriter()
 ) {
     /**
      * The registered commands.
@@ -58,6 +61,6 @@ class CommandRegistry(
 
         val cmd = commands[name] ?: return null
 
-        return { state -> cmd.apply(args, state)}
+        return { state -> cmd.apply(args, state, output)}
     }
 }
