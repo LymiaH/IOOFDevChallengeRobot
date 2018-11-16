@@ -1,0 +1,27 @@
+REM The robot moves in a clockwise square, back to its starting position.
+PLACE 0,0,NORTH
+REPORT
+
+MOVE
+REPORT
+
+RIGHT
+REPORT
+
+MOVE
+REPORT
+
+RIGHT
+REPORT
+
+MOVE
+REPORT
+
+RIGHT
+REPORT
+
+MOVE
+REPORT
+
+RIGHT
+REPORT

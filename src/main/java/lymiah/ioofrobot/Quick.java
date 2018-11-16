@@ -1,5 +1,7 @@
 package lymiah.ioofrobot;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Collections;
@@ -118,7 +120,8 @@ public class Quick {
         }
     }
 
-    public static void main(String[] args) {
-        process(System.in, System.out, System.err);
+    public static void main(String[] args) throws FileNotFoundException {
+        InputStream in = args.length == 0 ? System.in : new FileInputStream(args[0]);
+        process(in, System.out, System.err);
     }
 }
