@@ -1,8 +1,7 @@
 # IOOFDevChallengeRobot
 oofbot's cousin?
 
-## Running Main
-Interactively:
+## Running
 ```
 ./gradlew --console=plain runMain
 ```
@@ -12,11 +11,10 @@ From file:
 ```
 
 ## Running Quick
-Interactively:
+Use `runQuick` task instead of `runMain`.
+
+## Running Tests
 ```
-./gradlew --console=plain runQuick
+./gradlew test
 ```
-From file:
-```
-./gradlew --console=plain runQuick --args="examples/square2x2.in"
-```
+Run from IntelliJ's Gradle tab to view details of each test.
