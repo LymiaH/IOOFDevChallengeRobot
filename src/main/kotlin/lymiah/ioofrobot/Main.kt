@@ -37,6 +37,7 @@ fun ((RobotState?) -> RobotState?).wrapIllegalArguments(): (RobotState?) -> Robo
  *
  * @param parser CommandRegistry for parsing lines.
  * @param boundary Boundary condition for checking if the initial state is valid.
+ * @param line Text to parse into a command
  * @return True iff has a valid initial state. False otherwise.
  */
 fun lineHasInitialState(parser: CommandRegistry, boundary: IBoundary, line: String): Boolean {
@@ -52,10 +53,11 @@ fun lineHasInitialState(parser: CommandRegistry, boundary: IBoundary, line: Stri
 }
 
 /**
- * Attempts to parse the line, and obtain an initial state from it.
+ * Parses a command, and if found attempts to apply it to the simulation.
  *
  * @param parser CommandRegistry for parsing lines
  * @param sim Simulation of robot
+ * @param line Text to parse into a command
  * @return True iff the command was successful. False otherwise.
  */
 fun parseCommandAndApplyToSimulation(parser: CommandRegistry, sim: RobotSimulation, line: String): Boolean {
@@ -67,9 +69,11 @@ fun parseCommandAndApplyToSimulation(parser: CommandRegistry, sim: RobotSimulati
     }
 }
 
-fun processInput(input: BufferedReader, output: PrintStream) {
+fun processInput(input: BufferedReader, output: PrintStream, err: PrintStream) {
 
-    val parser = CommandRegistry(registerDefaults = true, output = output)
+    eprintln("Robot ready.")
+
+    val parser = CommandRegistry(registerDefaults = true, output = output, error=err)
     val boundary = RectangleBoundary(width = 5, height = 5)
 
     // Runs commands till once specifies initial state (by default only the PlaceCommand)
@@ -79,6 +83,8 @@ fun processInput(input: BufferedReader, output: PrintStream) {
         if(lineHasInitialState(parser, boundary, line)) {
             initialStateLine = line
             break
+        } else {
+            eprintln("Ignoring Command: ${line}")
         }
     }
 
@@ -94,15 +100,15 @@ fun processInput(input: BufferedReader, output: PrintStream) {
     // Creating a simulation using the initial state found
     val sim =  RobotSimulation(initialState = initialState) //TODO: Configurable boundary?
     input.useLines{ ls ->
-        //val lines = reader.lines().asSequence()
-        val lines = ls.onEach {
-            eprintln("Read: ${it}")
-        }
+//        val lines = reader.lines().asSequence()
+//        val lines = ls.onEach {
+//            eprintln("Read: ${it}")
+//        }
+        val lines = ls
 
         // Runs the remaining commands on the simulation
         lines.forEach { line ->
             parseCommandAndApplyToSimulation(parser, sim, line)
-            output.flush()
         }
     }
 }
@@ -116,6 +122,6 @@ fun main(args: Array<String>) {
     }
 
     input.use {
-        processInput(input, System.out)
+        processInput(input, System.out, System.err)
     }
 }

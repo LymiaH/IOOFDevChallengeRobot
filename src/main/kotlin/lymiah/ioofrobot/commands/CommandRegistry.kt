@@ -13,7 +13,8 @@ import java.util.*
  */
 class CommandRegistry(
         val registerDefaults: Boolean = true,
-        val output: PrintStream = PrintStream(NulledOutputStream())
+        val output: PrintStream = PrintStream(NulledOutputStream()),
+        val error: PrintStream = PrintStream(NulledOutputStream())
 ) {
     /**
      * The registered commands.
