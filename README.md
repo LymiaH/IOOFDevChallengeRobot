@@ -18,5 +18,5 @@ Interactively:
 ```
 From file:
 ```
-./gradlew --console=plain runMain --args="examples/square2x2.in"
+./gradlew --console=plain runQuick --args="examples/square2x2.in"
 ```
